@@ -1,0 +1,56 @@
+{
+  "short_name": "L2 Orderbook",
+  "name": "Crypto L2 Orderbook Analyzer",
+  "description": "Real-time cryptocurrency orderbook analyzer with AI insights",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#1a1b26",
+  "background_color": "#0d0e14",
+  "orientation": "portrait",
+  "categories": ["finance", "productivity"],
+  "screenshots": [
+    {
+      "src": "screenshot1.png",
+      "sizes": "1170x2532",
+      "type": "image/png",
+      "label": "Orderbook View"
+    },
+    {
+      "src": "screenshot2.png",
+      "sizes": "1170x2532",
+      "type": "image/png",
+      "label": "AI Insights"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Binance BTC",
+      "url": "/?exchange=binance&symbol=BTCUSDT",
+      "description": "Open Binance BTC/USDT"
+    },
+    {
+      "name": "AI Insights",
+      "url": "/?tab=ai",
+      "description": "View AI market analysis"
+    }
+  ]
+}

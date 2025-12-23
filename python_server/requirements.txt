@@ -1,0 +1,45 @@
+# Core async web framework
+aiohttp>=3.9.0
+python-socketio>=5.10.0  # Async Socket.IO server
+
+# WebSocket libraries
+websockets>=12.0
+websocket-client>=1.6.4
+
+# High-performance async
+uvloop>=0.19.0  # Optional: 2-4x faster event loop (Linux/macOS)
+asyncio>=3.4.3
+
+# Flask alternatives (if using sync version)
+flask>=3.0.0
+flask-socketio>=5.3.0
+flask-cors>=4.0.0
+
+# Data processing
+numpy>=1.24.0
+pandas>=2.0.0  # Optional: For advanced data analysis
+
+# Utilities
+python-dotenv>=1.0.0
+requests>=2.31.0
+aiofiles>=23.0.0  # Async file I/O
+
+# Development tools
+black>=23.0.0  # Code formatter
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.1.0
+
+# Optional: ML/AI libraries (uncomment if needed)
+# tensorflow>=2.14.0
+# scikit-learn>=1.3.0
+# torch>=2.1.0
+
+# Optional: Database support
+# supabase>=2.0.0
+# asyncpg>=0.29.0  # Async PostgreSQL
+# motor>=3.3.0  # Async MongoDB
+
+# Optional: Monitoring
+# prometheus-client>=0.19.0
+# aiohttp-prometheus>=0.2.4

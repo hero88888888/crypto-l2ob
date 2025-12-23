@@ -1,0 +1,146 @@
+/* Mobile-specific styles and PWA optimizations */
+
+/* Safe areas for iPhone notch and home indicator */
+.safe-area-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Prevent overscroll bounce on iOS */
+body {
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Full height on mobile browsers */
+.h-screen {
+  height: 100vh;
+  height: -webkit-fill-available;
+  height: fill-available;
+}
+
+/* iOS PWA Styles */
+@media screen and (display-mode: standalone) {
+  /* Hide status bar content when in standalone mode */
+  body {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Disable text selection for app-like experience */
+.mobile-app {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Smooth scrolling */
+.mobile-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Bottom navigation fixed positioning */
+.mobile-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+}
+
+/* Swipeable container */
+.swipe-container {
+  touch-action: pan-y pinch-zoom;
+}
+
+/* Pull to refresh styles */
+.ptr-element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.8);
+  text-align: center;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s;
+}
+
+.ptr-refresh {
+  height: 50px;
+  line-height: 50px;
+}
+
+/* Landscape optimizations */
+@media screen and (orientation: landscape) {
+  .landscape-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .mobile-nav {
+    display: none;
+  }
+}
+
+/* Small device optimizations */
+@media screen and (max-width: 375px) {
+  .text-xs {
+    font-size: 0.7rem;
+  }
+  
+  .text-sm {
+    font-size: 0.8rem;
+  }
+}
+
+/* Loading animations */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Haptic feedback simulation */
+.haptic-light {
+  transition: transform 0.1s;
+}
+
+.haptic-light:active {
+  transform: scale(0.97);
+}
+
+/* iOS specific fixes */
+@supports (-webkit-touch-callout: none) {
+  /* iOS-specific styles */
+  input, textarea {
+    font-size: 16px; /* Prevents zoom on input focus */
+  }
+  
+  .mobile-app {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Android specific optimizations */
+@media screen and (min-device-pixel-ratio: 2) {
+  /* High DPI Android devices */
+  .border {
+    border-width: 0.5px;
+  }
+}
