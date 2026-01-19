@@ -17,14 +17,15 @@ from .connectors.okx_async import OKXAsyncConnector
 
 logger = logging.getLogger(__name__)
 
+
 class ExchangeManagerAsync:
     """High-performance async manager for multiple cryptocurrency exchanges"""
-    
+
     def __init__(self):
         """Initialize exchange connectors"""
         self.connectors: Dict[str, Any] = {}
         self.executor = ThreadPoolExecutor(max_workers=10)
-        
+
     async def initialize(self):
         """Initialize all exchange connectors asynchronously"""
         # Create connector instances
@@ -36,30 +37,30 @@ class ExchangeManagerAsync:
             'bybit': BybitAsyncConnector(),
             'okx': OKXAsyncConnector(),
         }
-        
+
         # Initialize all connectors concurrently
         init_tasks = [
-            connector.initialize() 
+            connector.initialize()
             for connector in self.connectors.values()
         ]
         await asyncio.gather(*init_tasks, return_exceptions=True)
-        
+
         logger.info(f"Initialized {len(self.connectors)} exchange connectors")
-    
+
     async def subscribe(self, exchange: str, symbol: str, callback: Callable) -> Dict[str, Any]:
         """Subscribe to orderbook updates for a symbol on an exchange"""
         if exchange not in self.connectors:
             raise ValueError(f"Exchange {exchange} not supported")
-        
+
         logger.info(f"Subscribing to {exchange} {symbol}")
         return await self.connectors[exchange].subscribe(symbol, callback)
-    
+
     async def unsubscribe(self, exchange: str, symbol: str):
         """Unsubscribe from orderbook updates"""
         if exchange in self.connectors:
             logger.info(f"Unsubscribing from {exchange} {symbol}")
             await self.connectors[exchange].unsubscribe(symbol)
-    
+
     async def get_available_exchanges(self) -> List[Dict[str, Any]]:
         """Get list of available exchanges and their supported pairs"""
         exchanges = []
@@ -71,11 +72,11 @@ class ExchangeManagerAsync:
                 'status': 'connected' if connector.is_connected() else 'disconnected'
             })
         return exchanges
-    
+
     async def close_all(self):
         """Close all exchange connections gracefully"""
         close_tasks = [
-            connector.close() 
+            connector.close()
             for connector in self.connectors.values()
         ]
         await asyncio.gather(*close_tasks, return_exceptions=True)

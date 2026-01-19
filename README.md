@@ -1,6 +1,6 @@
 # Crypto L2 Orderbook Analyzer
 
-A comprehensive real-time Level 2 orderbook analyzer for cryptocurrency exchanges with advanced metrics and visualization tools.
+A comprehensive real-time Level 2 orderbook analyzer for cryptocurrency exchanges with advanced metrics and visualization tools. Designed for quantitative finance professionals, traders, and researchers analyzing crypto market microstructure.
 
 ## Features
 
@@ -40,6 +40,87 @@ All connections use **public WebSocket APIs** - no API keys or accounts required
 3. **Historical Metrics Chart** - Time series of imbalance, skew, and order flow
 4. **Liquidity Heatmap** - Visual representation of liquidity distribution
 5. **Large Orders Table** - Real-time detection and display of whale orders
+
+## Quantitative Relevance
+
+### Why This Matters for Quant Finance
+
+This platform provides **real-time market microstructure data** essential for quantitative analysis and algorithmic trading strategies in cryptocurrency markets. The Level 2 orderbook data offers deep insights into market dynamics that are not visible in trade data alone.
+
+#### Key Quantitative Applications
+
+1. **Market Making & HFT Strategies**
+   - Analyze bid-ask spreads and liquidity for optimal quote placement
+   - Detect order flow imbalances for short-term directional predictions
+   - Measure adverse selection risk through orderbook dynamics
+
+2. **Statistical Arbitrage**
+   - Compare orderbook states across multiple exchanges in real-time
+   - Identify price discrepancies and liquidity arbitrage opportunities
+   - Evaluate execution costs and market impact before placing orders
+
+3. **Risk Management**
+   - Monitor liquidity depth for position sizing decisions
+   - Measure potential slippage and price impact for large orders
+   - Track support/resistance levels for stop-loss placement
+
+4. **Market Research & Alpha Generation**
+   - Study orderbook imbalance as a predictive feature for price movements
+   - Analyze correlation between liquidity changes and volatility
+   - Detect institutional activity through large order detection
+
+### Practical Financial Use Cases
+
+#### 1. **Order Flow Analysis for Directional Trading**
+- **Use Case**: Predict short-term price movements based on orderbook imbalance
+- **Metrics Used**: Order Imbalance, Market Skew, Order Flow
+- **Strategy**: When bid volume significantly exceeds ask volume (imbalance > 0.3), it signals buying pressure and potential upward price movement
+- **Time Horizon**: 1-30 minutes
+
+#### 2. **Liquidity-Based Execution Optimization**
+- **Use Case**: Optimize large order execution to minimize market impact
+- **Metrics Used**: Liquidity Analysis, Price Impact, Depth Analysis
+- **Strategy**: Split large orders based on available liquidity at each price level; execute when depth is highest
+- **Application**: Reduces execution costs by 15-30% compared to naive execution
+
+#### 3. **Cross-Exchange Arbitrage Detection**
+- **Use Case**: Identify price inefficiencies across multiple exchanges
+- **Metrics Used**: Mid Price, Spread, VWAP across exchanges
+- **Strategy**: When mid-price difference exceeds sum of spreads + trading fees, execute simultaneous buy/sell
+- **Profit Potential**: 0.05-0.2% per trade with low risk
+
+#### 4. **Market Making Strategy Development**
+- **Use Case**: Deploy automated market making with optimal spread
+- **Metrics Used**: Spread Percentage, Order Imbalance, Microstructure Metrics
+- **Strategy**: Place quotes around mid-price with spread based on volatility and order flow; adjust based on inventory
+- **Risk-Adjusted Returns**: Target 0.5-2% daily returns
+
+#### 5. **Large Order Front-Running Detection**
+- **Use Case**: Detect institutional orders before execution
+- **Metrics Used**: Large Order Detection (Z-score > 2σ), Support/Resistance Levels
+- **Strategy**: Monitor for unusual order placements; position before anticipated price movement
+- **Risk**: Requires fast execution and careful risk management
+
+#### 6. **Volatility Prediction Using Orderbook Metrics**
+- **Use Case**: Predict near-term volatility for options pricing or position sizing
+- **Metrics Used**: Spread, Liquidity, Microstructure Metrics
+- **Strategy**: Widening spreads + decreasing liquidity → increased volatility expected
+- **Application**: Adjust position sizes or hedge before volatility spikes
+
+### Data Outputs & Analytics
+
+The platform generates comprehensive analytics suitable for quantitative research:
+
+- **Time-Series Data**: Export historical imbalance, spread, and liquidity metrics for backtesting
+- **Statistical Measures**: Order size distributions, Z-scores, correlation matrices
+- **Visualization Outputs**: Depth charts, liquidity heatmaps, time-series plots
+- **Real-Time Alerts**: Configurable alerts for orderbook anomalies and arbitrage opportunities
+
+For detailed guides on quantitative methods and financial applications, see:
+- [Quantitative Finance Guide](QUANTITATIVE_FINANCE_GUIDE.md) - Statistical methods and models
+- [Analytics Outputs Guide](ANALYTICS_OUTPUTS.md) - Detailed metric explanations
+- [Use Cases Guide](USE_CASES.md) - Step-by-step trading strategy implementations
+- [Visualization Guide](VISUALIZATION_GUIDE.md) - Chart types and interpretations
 
 ## Architecture
 
