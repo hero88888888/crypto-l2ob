@@ -1,7 +1,7 @@
 """Binance WebSocket connector for L2 orderbook data"""
 
-import time  # Add this import at the top of the file
 import json
+import time
 import logging
 import requests
 from typing import List, Dict, Any

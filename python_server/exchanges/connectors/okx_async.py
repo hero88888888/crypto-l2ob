@@ -3,7 +3,7 @@ OKX Async WebSocket connector for L2 orderbook data
 High-performance implementation using asyncio
 """
 
-import asyncio  # Required for async operations
+import asyncio
 import json
 import logging
 import time
