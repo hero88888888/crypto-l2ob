@@ -36,6 +36,7 @@ analyzer = OrderbookAnalyzer()
 # Store active subscriptions
 active_subscriptions: Dict[str, Any] = {}
 
+
 @app.route('/health', methods=['GET'])
 def health_check():
     """Health check endpoint"""
@@ -45,11 +46,13 @@ def health_check():
         'activeSubscriptions': list(active_subscriptions.keys())
     })
 
+
 @socketio.on('connect')
 def handle_connect():
     """Handle client connection"""
     logger.info(f"Client connected: {request.sid}")
     emit('connection_status', {'status': 'connected'})
+
 
 @socketio.on('disconnect')
 def handle_disconnect():
@@ -62,11 +65,13 @@ def handle_disconnect():
             exchange_manager.unsubscribe(exchange, symbol)
             del active_subscriptions[key]
 
+
 @socketio.on('get_exchanges')
 def handle_get_exchanges():
     """Send available exchanges to client"""
     exchanges = exchange_manager.get_available_exchanges()
     emit('exchanges', exchanges)
+
 
 @socketio.on('subscribe')
 def handle_subscribe(data):
@@ -75,19 +80,19 @@ def handle_subscribe(data):
         exchange = data.get('exchange')
         symbol = data.get('symbol')
         client_id = request.sid
-        
+
         key = f"{exchange}_{symbol}"
-        
+
         # If not already subscribed, create new subscription
         if key not in active_subscriptions:
             logger.info(f"Creating subscription for {exchange} {symbol}")
-            
+
             def orderbook_callback(orderbook_data):
                 """Callback for orderbook updates"""
                 try:
                     # Calculate metrics
                     metrics = analyzer.calculate_metrics(orderbook_data)
-                    
+
                     # Emit to all connected clients
                     socketio.emit('orderbook_update', {
                         'exchange': exchange,
@@ -98,14 +103,14 @@ def handle_subscribe(data):
                     })
                 except Exception as e:
                     logger.error(f"Error processing orderbook: {e}")
-            
+
             # Subscribe to exchange
             subscription = exchange_manager.subscribe(exchange, symbol, orderbook_callback)
             active_subscriptions[key] = {
                 'subscription': subscription,
                 'client_id': client_id
             }
-            
+
             emit('subscription_status', {
                 'status': 'subscribed',
                 'exchange': exchange,
@@ -113,10 +118,11 @@ def handle_subscribe(data):
             })
         else:
             logger.info(f"Already subscribed to {exchange} {symbol}")
-            
+
     except Exception as e:
         logger.error(f"Error handling subscription: {e}")
         emit('error', {'message': str(e)})
+
 
 @socketio.on('unsubscribe')
 def handle_unsubscribe(data):
@@ -125,11 +131,11 @@ def handle_unsubscribe(data):
         exchange = data.get('exchange')
         symbol = data.get('symbol')
         key = f"{exchange}_{symbol}"
-        
+
         if key in active_subscriptions:
             exchange_manager.unsubscribe(exchange, symbol)
             del active_subscriptions[key]
-            
+
             emit('subscription_status', {
                 'status': 'unsubscribed',
                 'exchange': exchange,
@@ -139,16 +145,18 @@ def handle_unsubscribe(data):
         logger.error(f"Error handling unsubscription: {e}")
         emit('error', {'message': str(e)})
 
+
 def run_server(port=3001):
     """Run the server"""
     logger.info(f"Starting server on port {port}")
-    
+
     # Start exchange manager in background
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
-    
+
     # Run Flask-SocketIO server
     socketio.run(app, host='0.0.0.0', port=port, debug=False)
+
 
 if __name__ == '__main__':
     try:
